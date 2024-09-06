@@ -1,18 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { Image, VStack } from "native-base"
+import Logo from '../../assets/Logo.png'
 
 export default function Login() {
     return (
-        <View style={styles.container}>
-            <Text>Tela LOGIN</Text>
-        </View>
+        <VStack flex={1} alignItems="center" p={5}>
+            <Image source={Logo} alt="Logo Voll"/>
+        </VStack>
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
