@@ -1,8 +1,11 @@
 import { NativeBaseProvider, StatusBar } from 'native-base';
 import Home from './src/pages/Home';
+import { THEMAS } from './src/@types'
 
 export default function App() {
   return (
-    <Home />
+    <NativeBaseProvider theme={THEMAS}>
+      <Home />
+    </NativeBaseProvider>
   );
 }
