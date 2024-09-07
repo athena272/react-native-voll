@@ -1,11 +1,19 @@
 import { Image, VStack, Text, Box, Link } from "native-base"
 import { TouchableOpacity } from "react-native"
+import { NavigationProp, useNavigation } from "@react-navigation/native"
+import { RootStackParamList } from "../../@types"
 import Logo from '../../assets/Logo.png'
 import Title from "../../components/Title"
 import BTN from "../../components/Button"
 import InpuText from "../../components/InputText"
 
 export default function Login() {
+    const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+
+    function handleNavToRegister() {
+        navigation.navigate('Register')
+    }
+
     return (
         <VStack flex={1} alignItems="center" justifyContent={"center"} p={5}>
             <Image source={Logo} alt="Logo Voll" />
@@ -32,8 +40,8 @@ export default function Login() {
             </Link>
             <Box w="100%" flexDirection="row" justifyContent="center" mt={8}>
                 <Text>Ainda não tem cadastro? </Text>
-                <TouchableOpacity>
-                    <Text color="blue.500">
+                <TouchableOpacity onPress={handleNavToRegister}>
+                    <Text color="blue.900" fontWeight={"bold"}>
                         Faça seu cadastro!
                     </Text>
                 </TouchableOpacity>
