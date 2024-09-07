@@ -56,7 +56,7 @@ export default function Register() {
             </Box>
             {
                 numSection > firstSection &&
-                <BTN onPress={prevSection} bgColor={'gray.400'}>
+                <BTN onPress={prevSection} bgColor={'gray.700'}>
                     Voltar
                 </BTN>
             }
