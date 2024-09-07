@@ -35,6 +35,7 @@ export default function Register() {
                         key={input.id}
                         label={input.label}
                         placeholder={input.placeholder}
+                        secureTextEntry={input.secureTextEntry}
                     />
                 ))}
             </Box>
