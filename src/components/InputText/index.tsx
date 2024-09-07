@@ -4,7 +4,6 @@ type InpuTextProps = {
     label?: string
     placeholder: string
     secureTextEntry?: boolean
-    leftIcon?: React.ReactNode
 }
 
 export default function InpuText({ label, placeholder, secureTextEntry = false }: InpuTextProps) {
