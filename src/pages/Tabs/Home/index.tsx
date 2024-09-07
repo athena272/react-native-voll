@@ -34,7 +34,9 @@ export default function Home() {
                                 <Text color="gray.300" fontSize="md" textAlign="justify">
                                     {depoimento.text}
                                 </Text>
-                                <Text color="gray.500" fontSize="lg" fontWeight="bold" alignSelf="center" mt="2">{depoimento.titulo}</Text>
+                                <Text color="gray.500" fontSize="lg" fontWeight="bold" alignSelf="center" mt="2">
+                                    {depoimento.titulo}
+                                </Text>
                             </Box>
                         ))
                     }
