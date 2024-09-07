@@ -14,6 +14,10 @@ export default function Login() {
         navigation.navigate('Register')
     }
 
+    function handleNavToTabs() {
+        navigation.navigate('Tabs')
+    }
+
     return (
         <VStack flex={1} alignItems="center" justifyContent={"center"} p={5}>
             <Image source={Logo} alt="Logo Voll" />
@@ -32,7 +36,7 @@ export default function Login() {
                     placeholder="Insira sua senha"
                 />
             </Box>
-            <BTN>
+            <BTN onPress={handleNavToTabs}>
                 Entrar
             </BTN>
             <Link href='https.:ww.alura.com.br' mt={2}>
