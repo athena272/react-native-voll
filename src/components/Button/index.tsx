@@ -10,7 +10,7 @@ export default function BTN({ children, autoSize = false, color, ...rest }: BTNP
     return (
         <Button
             w={autoSize ? 'auto' : '100%'}
-            bg={color || 'blue.500'}
+            bg={color || 'blue.900'}
             mt={10}
             borderRadius="lg"
             _text={{ color: 'white' }}
