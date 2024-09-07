@@ -14,7 +14,8 @@ export const sections = [
                 label: 'E-mail',
                 placeholder: 'Digite seu e-mail'
             },
-        ]
+        ],
+        checkbox: []
     },
     // Second section
     {
@@ -25,6 +26,23 @@ export const sections = [
                 id: 1,
                 label: 'CEP',
                 placeholder: 'Digite seu CEP'
+            }
+        ],
+        checkbox: []
+    },
+    //Third section
+    {
+        id: 3,
+        title: 'Para finalizar, qual seu plano de saúde?',
+        inputText: [],
+        checkbox: [
+            {
+                id: 1,
+                value: 'Sulamérica'
+            },
+            {
+                id: 2,
+                value: 'Unimed'
             }
         ]
     }
