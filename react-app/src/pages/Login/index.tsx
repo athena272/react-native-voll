@@ -1,17 +1,20 @@
-import { Image, VStack, Text, Box, Link } from "native-base"
+import { useEffect, useState } from "react"
+import { Image, VStack, Text, Box, Link, useToast } from "native-base"
 import { TouchableOpacity } from "react-native"
-import { NavigationProp, useNavigation } from "@react-navigation/native"
+import { useNavigation } from "@react-navigation/native"
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { jwtDecode } from "jwt-decode"
 import { RootStackParamList } from "../../@types"
 import Logo from '../../assets/Logo.png'
 import Title from "../../components/Title"
 import BTN from "../../components/Button"
 import InpuText from "../../components/InputText"
-import { useState } from "react"
 import { login } from "../../services/Authentication"
 
 export default function Login() {
     //Navigation logic
-    const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
     function handleNavToRegister() {
         navigation.navigate('Register')
@@ -20,14 +23,39 @@ export default function Login() {
     async function handleNavToTabs() {
         const result = await login({ email: form.email, password: form.password })
         if (result) {
-            navigation.navigate('Tabs')
+            const { token } = result
+            AsyncStorage.setItem('token', token)
+
+            const decodeToken = jwtDecode(token) as any
+            const pacienteId = decodeToken.id
+            AsyncStorage.setItem('pacienteId', pacienteId)
+
+            navigation.replace('Tabs')
         }
         else {
-            console.log('ERROR: Failed to register')
+            toast.show({
+                title: 'Erro no login',
+                description: 'Credenciais inválidas',
+                backgroundColor: 'red.500',
+            })
         }
     }
 
+    useEffect(() => {
+        async function checkLogin() {
+            const token = await AsyncStorage.getItem('token')
+            if (token) {
+                navigation.replace('Tabs')
+            }
+
+            setLoading(false)
+        }
+        checkLogin()
+    }, [])
+
     //Login logic
+    const toast = useToast()
+    const [loading, setLoading] = useState(true)
     const [form, setFormm] = useState({
         email: '',
         password: '',
@@ -38,6 +66,16 @@ export default function Login() {
             ...form,
             [name]: value
         })
+    }
+
+    if (loading) {
+        return (
+            <VStack flex={1} alignItems="center" justifyContent={"center"}>
+                <Title>
+                    Carregando...
+                </Title>
+            </VStack>
+        )
     }
 
     return (
