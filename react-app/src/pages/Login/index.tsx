@@ -6,16 +6,38 @@ import Logo from '../../assets/Logo.png'
 import Title from "../../components/Title"
 import BTN from "../../components/Button"
 import InpuText from "../../components/InputText"
+import { useState } from "react"
+import { login } from "../../services/Authentication"
 
 export default function Login() {
+    //Navigation logic
     const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
     function handleNavToRegister() {
         navigation.navigate('Register')
     }
 
-    function handleNavToTabs() {
-        navigation.navigate('Tabs')
+    async function handleNavToTabs() {
+        const result = await login({ email: form.email, password: form.password })
+        if (result) {
+            navigation.navigate('Tabs')
+        }
+        else {
+            console.log('ERROR: Failed to register')
+        }
+    }
+
+    //Login logic
+    const [form, setFormm] = useState({
+        email: '',
+        password: '',
+    })
+
+    function handleChange(name: string, value: string) {
+        setFormm({
+            ...form,
+            [name]: value
+        })
     }
 
     return (
@@ -29,11 +51,16 @@ export default function Login() {
                 <InpuText
                     label="E-mail"
                     placeholder="Insira seu e-mail"
+                    value={form.email}
+                    onChangeText={(text) => handleChange('email', text)}
                 />
                 {/* Senha */}
                 <InpuText
                     label="Senha"
                     placeholder="Insira sua senha"
+                    value={form.password}
+                    onChangeText={(text) => handleChange('password', text)}
+                    secureTextEntry
                 />
             </Box>
             <BTN onPress={handleNavToTabs}>
